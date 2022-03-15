@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MvvmHelpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace CustomerLog.ViewModels
 {
-    class TransactionViewModel
+    class TransactionViewModel: ObservableObject
     {
+
     }
 }

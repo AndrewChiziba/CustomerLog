@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerLog.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace CustomerLog.Views
         public Outgoing()
         {
             InitializeComponent();
+            BindingContext = new TransactionViewModel();
         }
     }
 }
