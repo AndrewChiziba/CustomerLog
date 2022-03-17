@@ -5,8 +5,7 @@ using System.Text;
 
 namespace CustomerLog.ViewModels
 {
-    class TransactionViewModel: ViewModelBase
+    public class ViewModelBase: BaseViewModel
     {
-
     }
 }

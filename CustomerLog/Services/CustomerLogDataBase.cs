@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CustomerLog.Services
 {
@@ -21,8 +22,34 @@ namespace CustomerLog.Services
 
         public CustomerLogDataBase()
         {
+            if(Database != null)
+            {
+                return;
+            }
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         }
 
+        public static async Task AddCustomer(string phonenumber, string name, double amount)
+        {
+            var customer = new Customer
+            {
+                PhoneNumber = phonenumber,
+                Name = name,
+                Amount = amount
+            };
+
+            await Database.InsertAsync(customer);
+        }
+
+        public static async Task RemoveCustomer(int id)
+        {
+            await Database.DeleteAsync<Customer>(id);
+        }
+
+        public static async Task<IEnumerable<Customer>> GetCustomers()
+        {
+            var customers = await Database.Table<Customer>().ToListAsync();
+            return customers;
+        }
     }
 }

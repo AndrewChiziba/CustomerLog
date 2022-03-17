@@ -6,16 +6,16 @@ using System.Text;
 
 namespace CustomerLog.Models
 {
-    class Transaction
+    public class Transaction
     {
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public double Amount { get; set; }
 
         [ForeignKey("Customer")]
         public int CustomerFK { get; set; }
 
-        public bool isOutgoing { get; set; }
+        public bool IsOutgoing { get; set; }
     }
 }
