@@ -1,12 +1,8 @@
 ﻿using CustomerLog.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 
 namespace CustomerLog.Views
 {
@@ -17,6 +13,11 @@ namespace CustomerLog.Views
         {
             InitializeComponent();
             BindingContext = new TransactionViewModel();
+        }
+
+        private void ListView_ItemTapped(Object sender, ItemTappedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

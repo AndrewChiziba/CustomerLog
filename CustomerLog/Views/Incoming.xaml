@@ -1,22 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CustomerLog.ViewModels" xmlns:model="clr-namespace:CustomerLog.Models"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              x:Class="CustomerLog.Views.Incoming">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:TransactionViewModel/>
+    </ContentPage.BindingContext>
+    
+    
 
-    <TableView Intent="Data">
-        <TableRoot>
-            <TableSection Title="Getting Started">
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Image Source="bulb.png" />
-                        <Label Text="left"
-                                 TextColor="Black" />
-                        <Label Text="right"
-                                 HorizontalOptions="EndAndExpand"
-                                 TextColor="#503026" />
-                    </StackLayout>
-                </ViewCell>
-            </TableSection>
-        </TableRoot>
-    </TableView>
+    <RefreshView
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        RefreshColor="Black">
+        
+        
+        
+    <CollectionView
+
+        BackgroundColor="Transparent" 
+        ItemSizingStrategy="MeasureAllItems"
+        SelectedItem="{Binding SelectedTransaction, Mode=TwoWay}"
+        ItemsSource="{Binding Transactions}" 
+        HeightRequest="200" 
+        RemainingItemsThreshold="1"
+        SelectionMode="Single">
+
+        <CollectionView.EmptyView>
+        <StackLayout>
+            <Label HorizontalOptions="Center" Text="No Incoming"/>
+        </StackLayout>
+        </CollectionView.EmptyView>
+        
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItems>
+                            <SwipeItem IsDestructive="True" Text="Delete" BackgroundColor="red"/>
+
+                        </SwipeItems>
+                        
+                    </SwipeView.RightItems>
+                    <Grid Margin="0" Padding="10" RowSpacing="0">
+                        <Frame>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <StackLayout >
+                                        <xct:AvatarView Size="50" Text="{Binding TransactionCustomer.Name}" HorizontalOptions="Start" Color="Black" />
+                                    </StackLayout>
+
+                                    <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18"  Text="{Binding TransactionCustomer.Name}"></Label>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:ddd, MMM d}'}"></Label>
+                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:T}'}"></Label>
+                                        
+                                    </StackLayout>
+                                
+                                <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding Amount}"></Label>
+                            </StackLayout>
+                        </Frame>
+
+                    </Grid>
+                </SwipeView>
+
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    </RefreshView>
 </ContentPage>
