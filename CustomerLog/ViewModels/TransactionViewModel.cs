@@ -25,7 +25,7 @@ namespace CustomerLog.ViewModels
 
             RefreshCommand = new AsyncCommand(Refresh);
 
-            //new Action(async () => await Refresh())();
+            new Action(async () => await Refresh())();
         }
 
         public TransactionDisplay selectedTransaction;
@@ -76,6 +76,11 @@ namespace CustomerLog.ViewModels
             };
 
             await CustomerServices.AddCustomer(customers);
+        }
+
+        public async Task Add(List<string> Messages)
+        {
+
         }
 
         public async Task Refresh()

@@ -47,17 +47,28 @@
                         <Frame>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <StackLayout >
-                                        <xct:AvatarView Size="50" Text="{Binding TransactionCustomer.Name}" HorizontalOptions="Start" Color="Black" />
+                                        <xct:AvatarView Size="50" Text="{Binding TransactionCustomer.Name}" FontAttributes="Bold"           HorizontalOptions="Center" Color="#022b3a" />
                                     </StackLayout>
 
-                                    <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18"  Text="{Binding TransactionCustomer.Name}"></Label>
-                                    <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TransactionCustomer.Name}"></Label>
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TransactionCustomer.PhoneNumber}"></Label>
+                                     </StackLayout>
+                                        
+                                
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
                                         <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:ddd, MMM d}'}"></Label>
                                         <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:T}'}"></Label>
                                         
                                     </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+
+                                        <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding Amount}"></Label>
+                                        
+                                    </StackLayout>
+
                                 
-                                <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding Amount}"></Label>
                             </StackLayout>
                         </Frame>
 

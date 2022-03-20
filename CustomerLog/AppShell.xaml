@@ -30,9 +30,9 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Incoming" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:Incoming}" />
-        <ShellContent Title="Outgoing" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:Outgoing}" />
-        <ShellContent Title="Graph" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:Graphs}" />
+        <ShellContent Title="Incoming" Icon="incoming.png" ContentTemplate="{DataTemplate local:Incoming}" />
+        <ShellContent Title="Outgoing" Icon="outgoing.png" ContentTemplate="{DataTemplate local:Outgoing}" />
+        <ShellContent Title="Graph" Icon="graph.png" ContentTemplate="{DataTemplate local:Graphs}" />
     </TabBar>
 
     <!--
