@@ -12,7 +12,8 @@ namespace CustomerLog
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(Incoming), typeof(Incoming));
-            Routing.RegisterRoute(nameof(Incoming), typeof(Incoming));
+            Routing.RegisterRoute(nameof(Outgoing), typeof(Outgoing));
+            Routing.RegisterRoute(nameof(TransactionsPage), typeof(TransactionsPage));
         }
 
     }

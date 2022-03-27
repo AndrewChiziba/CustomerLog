@@ -17,5 +17,8 @@ namespace CustomerLog.Models
         public int CustomerFK { get; set; }
 
         public bool IsOutgoing { get; set; }
+
+        [NotMapped]
+        public string ImagePath { get; set; }
     }
 }

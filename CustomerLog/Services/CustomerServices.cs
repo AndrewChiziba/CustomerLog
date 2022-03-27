@@ -21,7 +21,7 @@ namespace CustomerLog.Services
                 return;
 
             // Get an absolute path to the database file
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MobileMoney.db");
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MobileMoney1.db");
 
             Database = new SQLiteAsyncConnection(databasePath);
 
@@ -72,6 +72,7 @@ namespace CustomerLog.Services
         public static async Task AddTransaction(DateTime datetime, double amount, int customerid, bool isoutgoing)
         {
             await Init();
+
             var transaction = new Transaction
             {
                 Date = datetime,
@@ -86,7 +87,7 @@ namespace CustomerLog.Services
         public static async Task ProcessMessage(string Message)
         {
             //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable
+            //Assign to customer variable, and transaction variable
             //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
             
         }
@@ -110,21 +111,43 @@ namespace CustomerLog.Services
             return transactions;
         }
 
-        public static async Task<IEnumerable<TransactionDisplay>> GetTransactionsToDisplay()
+        public static async Task<IEnumerable<CustomerDisplay>> GetCustomersToDisplay()
         {
             await Init();
             var customers = await GetCustomers();
 
             var transactions = await Database.Table<Transaction>().ToListAsync();
 
-            var listoftransactionstodisplay = transactions.Select(x => new TransactionDisplay
+            var listofcustomerstodisplay = customers.Select(x => new CustomerDisplay
             {
+                TCustomer = x,
+                TTransaction = transactions.First(y => y.CustomerFK == x.Id)
+            });
+
+ 
+            return listofcustomerstodisplay;
+        }
+
+        public static async Task<TransactionDisplay> GetTransactionDisplay(int customerid)
+        {
+            await Init();
+            var customer = await Database.Table<Customer>().FirstOrDefaultAsync(x => x.Id == customerid);
+            var transactions = await Database.Table<Transaction>().Where(x => x.CustomerFK == customerid).ToArrayAsync();
+            var transactionswithimages = transactions.Select(x => new Transaction
+            {
+                Id = x.Id,
                 Date = x.Date,
                 Amount = x.Amount,
-                TransactionCustomer = customers.FirstOrDefault(y => y.Id == x.CustomerFK),
-                IsOutgoing = x.IsOutgoing
+                CustomerFK = x.CustomerFK,
+                IsOutgoing = x.IsOutgoing,
+                ImagePath = (x.IsOutgoing) ? "outgoingtransaction.png" : "incomingtransaction.png"
             });
-            return listoftransactionstodisplay;
+            var transactiondisplay = new TransactionDisplay
+            {
+                TCustomer = customer,
+                TTransactions = transactionswithimages
+            };
+            return transactiondisplay;
         }
 
     }

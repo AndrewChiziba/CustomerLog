@@ -6,9 +6,10 @@ using System.Text;
 namespace CustomerLog.Models
 {
     [NotMapped]
-    public class TransactionDisplay
+    public class CustomerDisplay
     {
+        public Transaction TTransaction { get; set; }
         public Customer TCustomer { get; set; }
-        public IEnumerable<Transaction> TTransactions { get; set; }
+
     }
 }

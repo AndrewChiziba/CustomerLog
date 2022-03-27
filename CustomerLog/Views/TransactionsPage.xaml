@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             x:Class="CustomerLog.Views.TransactionsPage">
+
+
+    <RefreshView
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        RefreshColor="Black">
+
+
+
+        <CollectionView
+
+        BackgroundColor="Transparent" 
+        ItemSizingStrategy="MeasureAllItems"
+        ItemsSource="{Binding TTransactions}" 
+        HeightRequest="200" 
+        RemainingItemsThreshold="1"
+        SelectionMode="None"
+            >
+
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Label HorizontalOptions="Center" Text="No Trasactions"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem IsDestructive="True" Text="Delete" BackgroundColor="red"/>
+
+                            </SwipeItems>
+
+                        </SwipeView.RightItems>
+                        <Grid Margin="0" Padding="10" RowSpacing="0">
+                            <Frame>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <xct:AvatarView Size="50" Source="{Binding ImagePath}" FontAttributes="Bold"           HorizontalOptions="Center" Color="LawnGreen"  />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:ddd, MMM d}'}"></Label>
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:T}'}"></Label>
+
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+
+                                        <Label Grid.Column="1" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding Amount}"></Label>
+                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="(ZMK)"></Label>
+                                        
+                                    </StackLayout>
+
+
+                                </StackLayout>
+                            </Frame>
+
+                        </Grid>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

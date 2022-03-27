@@ -30,16 +30,18 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Incoming" Icon="incoming.png" ContentTemplate="{DataTemplate local:Incoming}" />
-        <ShellContent Title="Outgoing" Icon="outgoing.png" ContentTemplate="{DataTemplate local:Outgoing}" />
-        <ShellContent Title="Graph" Icon="graph.png" ContentTemplate="{DataTemplate local:Graphs}" />
+        <ShellContent Title="Incoming" Icon="incoming.png" ContentTemplate="{DataTemplate local:Incoming}" Route="Incoming" />
+        <ShellContent Title="Outgoing" Icon="outgoing.png" ContentTemplate="{DataTemplate local:Outgoing}" Route="Outgoing" />
+        <ShellContent Title="Graph" Icon="graph.png" ContentTemplate="{DataTemplate local:Graphs}" Route="Graphs" />
     </TabBar>
+    
+    
 
     <!--
         If you would like to navigate to this content you can do so by calling
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-
+    
 
 
 </Shell>

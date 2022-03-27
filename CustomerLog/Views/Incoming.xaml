@@ -7,31 +7,36 @@
     <ContentPage.BindingContext>
         <viewmodels:TransactionViewModel/>
     </ContentPage.BindingContext>
-    
-    
+
+
 
     <RefreshView
         Command="{Binding RefreshCommand}"
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
         RefreshColor="Black">
-        
-        
-        
-    <CollectionView
+
+
+
+        <CollectionView
 
         BackgroundColor="Transparent" 
         ItemSizingStrategy="MeasureAllItems"
-        SelectedItem="{Binding SelectedTransaction, Mode=TwoWay}"
         ItemsSource="{Binding Transactions}" 
         HeightRequest="200" 
         RemainingItemsThreshold="1"
-        SelectionMode="Single">
+        SelectionMode="Single"
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        SelectionChangedCommand="{Binding SelectedCommand}" 
+        SelectionChangedCommandParameter="{Binding SelectedItem}"
+            >
 
-        <CollectionView.EmptyView>
+            <CollectionView.EmptyView>
         <StackLayout>
             <Label HorizontalOptions="Center" Text="No Incoming"/>
         </StackLayout>
         </CollectionView.EmptyView>
+
+ 
         
         <CollectionView.ItemTemplate>
             <DataTemplate>
@@ -47,24 +52,24 @@
                         <Frame>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <StackLayout >
-                                        <xct:AvatarView Size="50" Text="{Binding TransactionCustomer.Name}" FontAttributes="Bold"           HorizontalOptions="Center" Color="#022b3a" />
+                                        <xct:AvatarView Size="50" Text="{Binding TCustomer.Name}" FontAttributes="Bold"           HorizontalOptions="Center" Color="#022b3a" />
                                     </StackLayout>
 
                                     <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TransactionCustomer.Name}"></Label>
-                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TransactionCustomer.PhoneNumber}"></Label>
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TCustomer.Name}"></Label>
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"                 FontSize="18"  Text="{Binding TCustomer.PhoneNumber}"></Label>
                                      </StackLayout>
                                         
                                 
                                     <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:ddd, MMM d}'}"></Label>
-                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:T}'}"></Label>
+                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding TTransaction.Date,StringFormat='{0:ddd, MMM d}'}"></Label>
+                                        <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding TTransaction.Date,StringFormat='{0:T}'}"></Label>
                                         
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
-                                        <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding Amount}"></Label>
+                                        <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{ Binding TTransaction.Amount}"></Label>
                                         
                                     </StackLayout>
 

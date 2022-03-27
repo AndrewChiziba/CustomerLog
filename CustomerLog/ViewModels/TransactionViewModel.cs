@@ -1,5 +1,6 @@
 ﻿using CustomerLog.Models;
 using CustomerLog.Services;
+using CustomerLog.Views;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
@@ -12,35 +13,34 @@ namespace CustomerLog.ViewModels
 {
     class TransactionViewModel: ViewModelBase
     {
-        public ObservableRangeCollection<TransactionDisplay> Transactions { get; set; }
+        public ObservableRangeCollection<CustomerDisplay> Transactions { get; set; }
+
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
         public AsyncCommand RemoveCommand { get; }
+        public AsyncCommand<object> SelectedCommand { get; }
 
         public TransactionViewModel()
         {
             Title = "Transactions";
 
-            Transactions = new ObservableRangeCollection<TransactionDisplay>();
+            Transactions = new ObservableRangeCollection<CustomerDisplay>();
 
             RefreshCommand = new AsyncCommand(Refresh);
+
+            SelectedCommand = new AsyncCommand<object>(Selected);
 
             new Action(async () => await Refresh())();
         }
 
-        public TransactionDisplay selectedTransaction;
+        public CustomerDisplay selectedItem;
 
-        public TransactionDisplay SelectedTransaction
+        public CustomerDisplay SelectedItem
         {
-            get => selectedTransaction;
+            get => selectedItem;
             set
             {
-                if (value != null)
-                {
-                    Application.Current.MainPage.DisplayAlert("Selected", value.TransactionCustomer.Name, "OK");
-                    value = null;
-                }
-                selectedTransaction = value;
+                selectedItem = value;
                 OnPropertyChanged();
             }
         }
@@ -83,15 +83,25 @@ namespace CustomerLog.ViewModels
 
         }
 
+        public async Task Selected(object args)
+        {
+            var customer = args as CustomerDisplay;
+            if (customer == null)
+                return;
+            var route = $"{nameof(TransactionsPage)}?CustomerId={customer.TCustomer.Id}";
+            var route1 = $"{nameof(Outgoing)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
         public async Task Refresh()
         {
             IsBusy = true;
             //await AddDummyCustomers();
-            //await AddDummyTransactions;
+            //await AddDummyTransactions();
             await Task.Delay(2000);
             IsBusy = false;
             Transactions.Clear();
-            var listofcustomers = await CustomerServices.GetTransactionsToDisplay();
+            var listofcustomers = await CustomerServices.GetCustomersToDisplay();
             Transactions.AddRange(listofcustomers);
             IsBusy = false;
         }
