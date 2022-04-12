@@ -68,6 +68,7 @@ namespace CustomerLog.ViewModels
             Customers.AddRange(listofcustomers);
             IsBusy = false;
         }
+
     }
 
 
