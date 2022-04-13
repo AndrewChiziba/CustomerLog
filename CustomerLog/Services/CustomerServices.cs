@@ -84,13 +84,9 @@ namespace CustomerLog.Services
             await Database.InsertAsync(transaction);
         }
 
-        public static async Task ProcessMessage(string Message)
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
+
+
+
 
         public static async Task AddTransaction(IEnumerable<Transaction> transactions)
         {
@@ -98,10 +94,6 @@ namespace CustomerLog.Services
             var re = await Database.InsertAllAsync(transactions);
         }
 
-        public static async Task AddTransactions(List<string> Messages)
-        {
-             
-        }
 
 
         public static async Task<IEnumerable<Transaction>> GetTransactions()
@@ -132,7 +124,7 @@ namespace CustomerLog.Services
         {
             await Init();
             var customer = await Database.Table<Customer>().FirstOrDefaultAsync(x => x.Id == customerid);
-            var transactions = await Database.Table<Transaction>().Where(x => x.CustomerFK == customerid).ToArrayAsync();
+            var transactions = await Database.Table<Transaction>().Where(x => x.CustomerFK == customerid).ToListAsync();
             var transactionswithimages = transactions.Select(x => new Transaction
             {
                 Id = x.Id,
@@ -141,6 +133,7 @@ namespace CustomerLog.Services
                 CustomerFK = x.CustomerFK,
                 IsOutgoing = x.IsOutgoing,
                 ImagePath = (x.IsOutgoing) ? "outgoingtransaction.png" : "incomingtransaction.png"
+
             });
             var transactiondisplay = new TransactionDisplay
             {
@@ -148,6 +141,66 @@ namespace CustomerLog.Services
                 TTransactions = transactionswithimages
             };
             return transactiondisplay;
+        }
+
+
+        //Processes the messages 
+        public static async Task ProcessMessage(string Message)
+        {
+            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
+            bool IsOutgoing = CustomerServices.IsMessageOutgoing(Message);
+            //Assign to customer variable, and transaction variable
+            Customer customer = new Customer
+            {
+
+            };
+            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
+
+        }
+
+        // Function to assatain whether a transaction is incoming or outgoing
+        public static bool IsMessageOutgoing(string message)
+        {
+            string s1 = "Txn. ID : LP220326.0836.G55985. Payment to AMMOBILE Account NA of ZMW 10.00 is successful. Your Airtel Money balance is ZMW 219.98",
+            s2 = "Use NEW short code *115# for Airtel Money. Txn. ID : PP220324.0947.J19373. You have sent ZMW 26.00 to 978108812,Andrew Chiziba . Your available balance is ZMW 691.78.",
+            s3 = "Use NEW short code *115# for Airtel Money. You have withdrawn ZMW 700.00 from 974343542 Boster Hambubu. Your balance is ZMW 748.29. Txn. ID: CO220323.1601.L96515.",
+            s4 = "Dear Customer, you have received ZMW 600.00 from 978122020 CLARENCE BEENZU. Dial *115# to check your new balance. Txn ID: PP220323.1557.L16505.";
+
+            message = s1;
+
+            if (message.Contains("recieved"))
+            {
+                return false; // Message is not outgoing
+            }
+            else if (message.Contains("withdrawn"))
+            {
+                return true; // Message is outgoing
+            }
+            else if (message.Contains("Payment") && message.Contains("successful"))
+            {
+                return true; // Message is outgoing
+            }
+            else if (message.Contains("Sent"))
+            {
+                return true; // Message is outgoing
+            }
+            return false;
+        } 
+
+        public static string GetNumber(string Message)
+        {
+            return Message;
+        }
+
+        public static string GetName(string Message)
+        {
+            
+            return Message;
+        }
+
+        public static string GetAmount(string Message)
+        {
+            return Message;
         }
 
     }

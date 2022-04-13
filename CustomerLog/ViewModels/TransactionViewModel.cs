@@ -78,11 +78,6 @@ namespace CustomerLog.ViewModels
             await CustomerServices.AddCustomer(customers);
         }
 
-        public async Task Add(List<string> Messages)
-        {
-
-        }
-
         public async Task Selected(object args)
         {
             var customer = args as CustomerDisplay;
