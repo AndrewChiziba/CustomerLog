@@ -45,7 +45,7 @@
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                        <xct:AvatarView Size="50" Source="{Binding ImagePath}" FontAttributes="Bold"           HorizontalOptions="Center" Color="LawnGreen"  />
+                                        <xct:AvatarView Size="20" Source="{Binding ImagePath}" FontAttributes="Bold"           HorizontalOptions="Center" Color="LawnGreen"  />
                                     </StackLayout>
                                     <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
                                         <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18" Text="{Binding Date,StringFormat='{0:ddd, MMM d}'}"></Label>

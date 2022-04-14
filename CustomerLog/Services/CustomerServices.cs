@@ -83,63 +83,6 @@ namespace CustomerLog.Services
             await Database.InsertAsync(transaction);
         }
 
-        public static async Task ProcessMessage(string Message)
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-        {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
-            //Assign to customer variable, and transaction variable
-            //Check if customer exists, using Phone number. If customer exists then add transaction, if not first create customer and then Add transaction
-            
-        }
-
-
 
         public static async Task AddTransaction(IEnumerable<Transaction> transactions)
         {

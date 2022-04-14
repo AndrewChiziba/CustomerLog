@@ -6,5 +6,5 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS"/>
   <uses-permission android:name="android.permission.BROADCAST_SMS" />
-  <application android:label="SendAndReceiveSMS.Android"></application>
+  <!--<application android:label="SendAndReceiveSMS.Android" android:debuggable="true" ></application>-->
 </manifest>
