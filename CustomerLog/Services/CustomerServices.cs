@@ -10,7 +10,7 @@ using Xamarin.Essentials;
 
 namespace CustomerLog.Services
 {
-    class CustomerServices
+    public class CustomerServices
     {
         static SQLiteAsyncConnection Database;
 
@@ -20,7 +20,7 @@ namespace CustomerLog.Services
                 return;
 
             // Get an absolute path to the database file
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MobileMoney1.db");
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MobileMoney4.db");
 
             Database = new SQLiteAsyncConnection(databasePath);
 
@@ -141,9 +141,9 @@ namespace CustomerLog.Services
 
 
         //Processes the messages 
-        public static async Task ProcessMessage(string Message)
+        public static async Task ProcessMessage(string Message, string number)
         {
-            //Determine whether incoming or outgoing. [function] incoming-keyword "recieved" outgoing-keywords "withdrawn, Payment...Successful, Sent.
+            //Determine whether incoming or outgoing.
             bool IsOutgoing = CustomerServices.IsMessageOutgoing(Message);
             //Assign to customer variable, and transaction variable
             Customer customer = new Customer
