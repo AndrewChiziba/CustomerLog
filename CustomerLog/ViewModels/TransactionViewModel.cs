@@ -93,6 +93,7 @@ namespace CustomerLog.ViewModels
             IsBusy = true;
             //await AddDummyCustomers();
             //await AddDummyTransactions();
+            //OnReceive();
             await Task.Delay(2000);
             IsBusy = false;
             Transactions.Clear();
