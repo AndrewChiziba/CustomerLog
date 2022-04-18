@@ -61,6 +61,13 @@ namespace CustomerLog.Services
             return customer;
         }
 
+        public static async Task<Customer> GetCustomer(string number)
+        {
+            await Init();
+            var customer = await Database.Table<Customer>().FirstOrDefaultAsync(x => x.PhoneNumber == number);
+            return customer;
+        }
+
         public static async Task AddCustomer(IEnumerable<Customer> customers)
         {
             await Init();
